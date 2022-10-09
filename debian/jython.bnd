@@ -1,0 +1,8 @@
+Bundle-Name: Jython - Python for the Java Platform
+Bundle-SymbolicName: org.python
+Bundle-Version: 1.0.0
+Bundle-Vendor: Debian.org
+Import-Package: !jline, !org.gnu.readline, junit.framework;resolution:=optional, *
+Export-Package: *
+Eclipse-BuddyPolicy: global
+-nouses: true

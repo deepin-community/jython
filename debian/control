@@ -1,0 +1,62 @@
+Source: jython
+Section: python
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Jakub Adam <jakub.adam@ktknet.cz>, Gilles Filippini <pini@debian.org>
+Build-Depends: debhelper (>= 10), dh-exec, ant, gawk, maven-repo-helper, javahelper, python3, libjaxb-api-java, dh-strip-nondeterminism
+Build-Depends-Indep: default-jdk,
+ dh-python,
+ junit4,
+ antlr3,
+ bnd (>= 2.1.0),
+ zip,
+ libasm-java,
+ libguava-java,
+ libjffi-java (>= 1.2.7~),
+ libjline2-java,
+ libjnr-constants-java (>= 0.8.6~),
+ libjnr-ffi-java (>= 1.0.10~),
+ libjnr-netdb-java,
+ libjnr-posix-java (>= 3.0.10~),
+ libjnr-x86asm-java,
+ libmariadb-java,
+ libpostgresql-jdbc-java,
+ libservlet-api-java,
+ libcommons-compress-java,
+ libicu4j-java,
+ libnetty-java
+Standards-Version: 4.2.1
+Vcs-Git: https://salsa.debian.org/java-team/jython.git
+Vcs-Browser: https://salsa.debian.org/java-team/jython
+Homepage: http://www.jython.org
+
+Package: jython
+Architecture: all
+Depends: ${misc:Depends}, ${perl:Depends}, ${python3:Depends}, ${java:Depends},
+ default-jre-headless (>= 2:1.8) | java8-runtime-headless,
+Recommends: default-jdk | java-compiler
+Suggests: jython-doc, libmariadb-java, libpostgresql-jdbc-java
+Description: Python seamlessly integrated with Java
+ Jython is an implementation of the high-level, dynamic, object-oriented
+ language Python seamlessly integrated with the Java platform.  The
+ predecessor to Jython, JPython, is certified as 100% Pure Java.
+ .
+ Jython is complementary to Java and allows the two languages to be freely
+ mixed.  It is especially suited for embedded scripting, interactive
+ experimentation and rapid application development, and it can
+ interact with Java packages or with running Java applications.
+
+Package: jython-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Recommends: w3m | www-browser
+Suggests: jython
+Description: Jython documentation including API docs
+ Official documentation for Jython, an implementation of Python
+ seamlessly integrated with Java.  This includes detailed Jython usage
+ information as well as the API documentation for the Jython classes.
+ .
+ This package only contains documentation specific to Jython; for general
+ Python documentation including a Python language reference and tutorial,
+ see Python web site : http://docs.python.org/.

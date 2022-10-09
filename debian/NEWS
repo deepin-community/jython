@@ -1,0 +1,15 @@
+jython (2.5.1-1) unstable; urgency=low
+
+    The jythonc command was removed in Jython 2.5.  See the Jython FAQ
+  for details (http://wiki.python.org/jython/JythonFaq/ProgrammingJython).
+
+ -- Nicolas Duboc <nduboc@debian.org>  Sun, 27 Jun 2010 16:04:38 +0200
+
+jython (2.1.0-22) unstable; urgency=low
+
+    With this new version jython 2.1 no longer depends on python 2.1 to
+  provide the standard library modules. Instead these modules are now
+  included in the jython package.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Sat, 27 May 2006 18:56:37 +0200
+

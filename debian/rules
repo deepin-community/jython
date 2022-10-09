@@ -1,0 +1,121 @@
+#!/usr/bin/make -f
+
+# Upstream ant project file build.xml hardcodes classpaths unsatisfiable
+# under Debian. Then I patch build.xml to extract, re-arrange and re-inject
+# them.
+# Also I add the run-time classpath into the jar's manifest so that jh_depends
+# could work effectively and it doesn't need to be hardcoded into the launcher
+# script.
+
+VERSION_UPSTREAM = $(shell dpkg-parsechangelog -S Version | sed -E 's/\+repack.*$$//')
+
+# Extract upstream main.classpath
+THEIR_MAIN_CLASSPATH = $(shell \
+  ant -nouserlib -quiet get-their-main-classpath | \
+  head -1 | \
+  sed 's/^ *\[echo\] *//' \
+)
+
+# Extract upstream test.classpath
+THEIR_TEST_CLASSPATH = $(shell \
+  ant -nouserlib -quiet get-their-test-classpath | \
+  head -1 | \
+  sed 's/^ *\[echo\] *//' \
+)
+
+# Macro to re-arrange classpath to match Debian's
+their_to_our = $(shell \
+  echo '$(1)' | \
+  sed 's/:/\n/g' | \
+  sed '\&^$(CURDIR)/\(extlibs\|build\)&!d' | \
+  sed 's:$(CURDIR)/extlibs:/usr/share/java:' | \
+  sed -r 's/jline-.*\.jar/jline2.jar/' | \
+  sed -r 's/junit-.*\.jar/junit4.jar/' | \
+  sed -r 's/(netty-.*)-.*\.jar/\1.jar/' | \
+  sed -r 's/(mysql-connector-java)-.*\.jar/mariadb-java-client.jar/' | \
+  sed -r 's/(postgresql)-.*\.jar/\1.jar/' | \
+  sed -r 's/(guava)-.*.jar/\1.jar/' | \
+  sed -r 's/(stringtemplate).jar/\14.jar/' | \
+  sed -r 's/antlr(-.*)?-3\..*\.jar/antlr3\1.jar/' | \
+  sed -r '/antlrall/d' | \
+  sed -r '/java-sizeof/d' | \
+  sed -r '/failureaccess/d' | \
+  sed -r '/antlr|netty/!s/(java\/.*)-[0-9\._]*\.jar/\1.jar/' | \
+  xargs echo | \
+  sed 's/ /:/g' \
+)
+ 
+# Fix main.classpath and test.classpath
+OUR_MAIN_CLASSPATH = $(call their_to_our,$(THEIR_MAIN_CLASSPATH))
+OUR_TEST_CLASSPATH = $(call their_to_our,$(THEIR_TEST_CLASSPATH))
+
+# Runtime classpath uses space as separator instead of ':'
+OUR_RUNTIME_CLASSPATH = $(shell echo '$(OUR_MAIN_CLASSPATH)' | sed 's/:/ /g')
+
+# Print and check classpaths to help finding missing dependencies
+print_classpath = echo '$(1)' | sed 's/:/\n/g' | sort | grep -v '$(CURDIR)/build/'
+ls_classpath = ls -1 $(foreach path,$(shell echo '$(1)' | sed 's/:/\n/g' | grep -v '$(CURDIR)/build/'),'$(path)')
+check_classpath:
+	@echo THEIR_MAIN
+	@$(call print_classpath,$(THEIR_MAIN_CLASSPATH)) || true
+	@echo OUR_MAIN
+	@$(call ls_classpath,$(OUR_MAIN_CLASSPATH))
+	@echo THEIR_TEST
+	@$(call print_classpath,$(THEIR_TEST_CLASSPATH)) || true
+	@echo OUR_TEST
+	@$(call ls_classpath,$(OUR_TEST_CLASSPATH))
+
+DEBIAN_IN = $(wildcard debian/*.in)
+DEBIAN_OUT = $(patsubst %.in,%,$(DEBIAN_IN))
+
+# Requested to prevent deletion of $(DEBIAN_OUT) files as intermediate files
+.SECONDARY: $(DEBIAN_OUT)
+
+info:
+	@echo $(DEBIAN_OUT)
+
+debian/%: debian/%.in
+	sed -e 's/@VERSION@/$(VERSION_UPSTREAM)/g' \
+	  $< >$@
+
+%:
+	dh $@ --with python3 --with javahelper --with jh-maven-repo-helper
+
+override_dh_auto_configure: check_classpath $(DEBIAN_OUT)
+	dh_auto_configure
+
+override_dh_auto_build:
+	# Reproducible builds - These files' mtime are stored into the
+	# generated $py.class files
+	touch -d @$(SOURCE_DATE_EPOCH) Lib/*.py lib-python/*/*.py
+	# Build the class files.
+	# -nouserlib is required to prevent conflicts with the ant jython plugin
+	ant -nouserlib developer-build jar javadoc \
+	  -Djython.java.version=8 \
+	  -Dmain.classpath=$(OUR_MAIN_CLASSPATH) \
+	  -Dtest.classpath=$(OUR_TEST_CLASSPATH) \
+	  -Druntime.classpath="$(OUR_RUNTIME_CLASSPATH)"
+
+	# Generate OSGi metadata for jython.jar
+	bnd wrap --properties debian/jython.bnd --output dist/jython.jar dist/jython-dev.jar
+
+	# Do not install the tests
+	rm -rf dist/Lib/test
+
+	# Embed the modules into the jar
+	cd dist && zip -r jython.jar Lib/
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf extlibs
+	rm -f $(DEBIAN_OUT)
+
+override_jh_installlibs:
+	jh_installlibs --version-strip="[+].*"
+
+# libmariadb-java and libpostgresql-jdbc-java are part of Suggests
+override_jh_depends:
+	jh_depends -Xlibmariadb-java -Xlibpostgresql-jdbc-java
+
+override_dh_installchangelogs:
+	dh_installchangelogs -- NEWS

@@ -1,0 +1,26 @@
+Description: Adds antlr-runtime to the classpath
+Author: Emmanuel Bourg <ebourg@apache.org>
+Index: jython/build.xml
+===================================================================
+--- jython.orig/build.xml
++++ jython/build.xml
+@@ -248,7 +248,10 @@ informix.jar = ../support/jdbc-4.10.12.j
+ 
+             <!-- Other JARs (alphabetical) -->
+             <filelist dir="${extlibs.dir}">
+-                <file name="antlr-complete-3.5.2.jar" /> <!-- ANTLR 3 until we upgrade parsing -->
++                <file name="antlr-3.2.jar" /> <!-- ANTLR 3 until we upgrade parsing -->
++                <file name="antlr-runtime-3.2.jar" />
++                <file name="antlrall.jar" />
++                <file name="stringtemplate.jar" />
+                 <file name="asm-7.1.jar" />
+                 <file name="asm-commons-7.1.jar" />
+                 <file name="asm-util-7.1.jar" />
+@@ -269,6 +272,7 @@ informix.jar = ../support/jdbc-4.10.12.j
+                 <file name="netty-handler-4.1.45.Final.jar"/>
+                 <file name="netty-resolver-4.1.45.Final.jar"/>
+                 <file name="netty-transport-4.1.45.Final.jar"/>
++                <file name="jaxb-api.jar"/>
+             </filelist>
+         </path>
+ 

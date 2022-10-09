@@ -1,0 +1,9 @@
+Document: jython-doc-api
+Title: Jython API Documentation
+Author: Jython Development Team <jython-dev@lists.sourceforge.net>
+Abstract: API documentation for the Jython classes.
+Section: Programming
+
+Format: HTML
+Index: /usr/share/doc/jython-doc/html/javadoc/index.html
+Files: /usr/share/doc/jython-doc/html/javadoc/*.html

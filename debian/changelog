@@ -1,0 +1,694 @@
+jython (2.7.2+repack1-4) unstable; urgency=medium
+
+  * Build-Depends: antlr3 (instead of antlr3.2; Closes: #995188)
+  * Build-Depends: libservlet-api-java (instead of deprecated
+    libservlet3.1-java)
+  * Remove deprecated lintien overrides
+
+ -- Gilles Filippini <pini@debian.org>  Tue, 28 Sep 2021 23:55:02 +0200
+
+jython (2.7.2+repack1-3) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable.
+
+ -- tony mancill <tmancill@debian.org>  Thu, 20 Aug 2020 21:03:20 -0700
+
+jython (2.7.2+repack1-2) experimental; urgency=medium
+
+  * Team upload
+  * Update build dependencies for python 3 (Closes: #936776, #967150)
+  * Upload to experimental to give users a chance to test.
+
+ -- tony mancill <tmancill@debian.org>  Wed, 05 Aug 2020 16:01:50 -0700
+
+jython (2.7.2+repack1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Auto-sync upstream version into pom.xml
+  * Improve build time classpath checks output
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 25 Apr 2020 10:31:22 +0200
+
+jython (2.7.2~rc1+repack1-2) unstable; urgency=medium
+
+  * Embed the modules into the jar
+
+ -- Gilles Filippini <pini@debian.org>  Thu, 19 Mar 2020 20:53:33 +0100
+
+jython (2.7.2~rc1+repack1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop patch 03-default-cachedir.patch (fixed upstream):
+    The default location of the Jython package cache has moved from the
+    installation directory to the current working directory and is called
+    ".jython_cache"
+  * Refresh other patches
+
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 08 Mar 2020 10:35:11 +0100
+
+jython (2.7.2~b3+repack1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Refresh patches
+  * Bump Java compatibility version to 8 because some test cases now use
+    String.join
+
+ -- Gilles Filippini <pini@debian.org>  Thu, 20 Feb 2020 22:48:07 +0100
+
+jython (2.7.2~b2+repack1-1) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 11 Jan 2020 14:20:11 +0100
+
+jython (2.7.2~b2+repack1-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+  * Update patches
+  * New patch antlr-getEOFToken.patch: workaround new API from antlr 3.5
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 23 Nov 2019 17:08:32 +0100
+
+jython (2.7.1+repack1-4) unstable; urgency=medium
+
+  * Team upload.
+  * Preserve the backward compatibility with Java 7 (Closes: #934111)
+  * Adjusted the Vcs-* fields
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Thu, 08 Aug 2019 10:11:23 +0200
+
+jython (2.7.1+repack1-3) unstable; urgency=medium
+
+  * Improve previous fix with default-jre-headless (>= 2:1.9), thanks to
+    Andreas Beckmann <anbe@debian.org> (closes: #924283)
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 04 May 2019 18:16:46 +0200
+
+jython (2.7.1+repack1-2) unstable; urgency=medium
+
+  * d/control: fix Vcs-Git field
+  * jython: increase minimal JRE version to Java9 (closes: #924283;
+    thanks to Ole Streicher)
+
+ -- Gilles Filippini <pini@debian.org>  Tue, 12 Mar 2019 19:02:20 +0100
+
+jython (2.7.1+repack1-1) unstable; urgency=medium
+
+  * Repack again upstream tarball to remove precompiled Windows binaries
+  * Point Vcs-* fields to salsa.debian.org
+  * Drop unused quilt patches
+  * d/rules: ant: do not enforce build.date and build.time: ant should use
+    $SOURCE_DATE_EPOCH when defined
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 13 Jan 2019 14:28:39 +0100
+
+jython (2.7.1+repack-7) unstable; urgency=medium
+
+  * New patch reproducible-builds.patch
+  * Replace timestamps with $SOURCE_DATE_EPOCH wherever possible
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 12 Jan 2019 23:27:44 +0100
+
+jython (2.7.1+repack-6) unstable; urgency=medium
+
+  * Team upload.
+  * Switch from libmysql-java to libmariadb-java.
+  * Declare compliance with Debian Policy 4.2.1.
+
+ -- Markus Koschany <apo@debian.org>  Fri, 09 Nov 2018 17:01:37 +0100
+
+jython (2.7.1+repack-5) unstable; urgency=medium
+
+  * Workaround JAXB removal from Java 11 (closes: #912473):
+    - Build-Depends: libjaxb-api-java
+    - Update patch 00-missing-dep.patch to add jaxb-api.jar to the classpath
+
+ -- Gilles Filippini <pini@debian.org>  Tue, 06 Nov 2018 23:02:01 +0100
+
+jython (2.7.1+repack-4) unstable; urgency=medium
+
+  [ Emmanuel Bourg ]
+  * Removed the unused build dependency on liblivetribe-jsr223-java
+
+  [ Gilles Filippini ]
+  * Fix jh_installlibs regex (closes: #909910)
+  * Add myself to Uploaders
+  * New patch javadoc-classpath.patch: add missing junit4.jar to the javadoc
+    classpath
+
+ -- Gilles Filippini <pini@debian.org>  Tue, 02 Oct 2018 23:00:24 +0200
+
+jython (2.7.1+repack-3) unstable; urgency=medium
+
+  * Improve dependencies tracking using upstream defined classpaths and
+    javahelper (closes: #877405)
+  * Replace overkilling launcher perl script with a much simpler shell
+    one
+  * Fix version in maven pom.xml file
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 22 Oct 2017 15:43:00 +0200
+
+jython (2.7.1+repack-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Gilles Filippini <pini@debian.org>  Sat, 30 Sep 2017 15:31:09 +0200
+
+jython (2.7.1+repack-1) experimental; urgency=medium
+
+  * New upstream release (closes: #827280, #800856, #777079)
+  * Fix debian/watch to repack without extlibs
+  * Update debian/copyright
+  * Drop patches:
+    - 02-jnr_refactoring.patch (fixed upstream)
+    - CVE-2016-4000.patch (fixed upstream)
+  * New patch 05-no-com.carrotsearch.sizeof.patch dropping the new 
+    jython modified version of getsizeof because of missing package
+    java-sizeof in Debian
+  * Update patches:
+    - 01-build.patch
+    - 03-default-cachedir.patch
+    - 04-runtime-classpath.patch
+  * Fix dependencies and run-time classpath
+
+ -- Gilles Filippini <pini@debian.org>  Wed, 13 Sep 2017 21:56:24 +0200
+
+jython (2.5.3-17) unstable; urgency=medium
+
+  * Team upload.
+  * Fix CVE-2016-4000: (Closes: #864859)
+    Unsafe deserialization may lead to arbitrary code execution.
+
+ -- Markus Koschany <apo@debian.org>  Fri, 16 Jun 2017 21:51:06 +0200
+
+jython (2.5.3-16) unstable; urgency=medium
+
+  * Improve 03-default-cachedir.patch to consider cachedir relative to
+    $HOME when it isn't an absolute path (closes: #857921, #857922)
+  * Set default cachedir in global registry as '.jython-cache' instead
+    of 'cachedir'
+
+ -- Gilles Filippini <pini@debian.org>  Mon, 20 Mar 2017 21:18:22 +0100
+
+jython (2.5.3-15) unstable; urgency=medium
+
+  * Set 'Class-Path' into jython.jar's manifest (closes: #855689)
+
+ -- Gilles Filippini <pini@debian.org>  Wed, 22 Feb 2017 11:52:18 +0100
+
+jython (2.5.3-14) unstable; urgency=medium
+
+  * debian/jython_perl: fix use of abs_path
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 11 Dec 2016 17:02:02 +0100
+
+jython (2.5.3-13) unstable; urgency=medium
+
+  * Fix permission for /usr/share/jython/bin/jython
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 11 Dec 2016 16:23:21 +0100
+
+jython (2.5.3-12) unstable; urgency=medium
+
+  * Team upload
+  * Fix jython.home setting (closes: 845270):
+    - Install jython laucher into /usr/share/jython/bin
+    - Make /usr/bin/jython a symlink to /usr/share/jython/bin/jython
+    - In the jython launcher, define jython.home with
+      dirname(dirname(abs_path($0)))
+  * New patch 03-default-cachedir.patch: the Debian default cachedir
+    path is now set at the library intialization step, so that it works
+    for every use case (closes: #845360)
+  * Move python from Build-Depends-Indep to Build-Depends to allow building
+    source only package (python provides the debhelper sequence file for
+    dh_python2)
+
+ -- Gilles Filippini <pini@debian.org>  Sun, 27 Nov 2016 21:48:24 +0100
+
+jython (2.5.3-11) unstable; urgency=medium
+
+  * Team upload.
+  * Restored the Export-Package field in the OSGi metadata (Closes: #808485)
+  * Switch to debhelper level 10
+  * Added the watch file
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 07 Nov 2016 14:36:32 +0100
+
+jython (2.5.3-10) unstable; urgency=medium
+
+  * Team upload.
+  * Install the Maven artifacts
+  * Build with the DH sequencer
+  * Removed the suggested dependency on the Servlet API
+  * Standards-Version updated to 3.9.8 (no changes)
+  * Use a secure Vcs-Git URL
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 20 Jun 2016 09:22:31 +0200
+
+jython (2.5.3-9) unstable; urgency=medium
+
+  * Team upload.
+  * Fixed the build classpath to really use the Servlet API 3.1
+    (Closes: #801027)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 21 Dec 2015 15:13:15 +0100
+
+jython (2.5.3-8) unstable; urgency=medium
+
+  * Team upload.
+  * Transition to bnd 2.1.0.
+  * Vcs-Browser: Switch to cgit and https.
+  * Fix Lintian warning binary-control-field-duplicates-source.
+  * Switch to libservlet3.1-java. (Closes: #801027)
+  * Drop unused jython-doc.override and jython.override files.
+  * Build depend on dh-python and add substvar ${python:Depends} to jython
+    package. Run dh_python2 in binary-indep target and fix Lintian error
+    python-script-but-no-python-dep.
+
+ -- Markus Koschany <apo@debian.org>  Wed, 18 Nov 2015 22:56:31 +0100
+
+jython (2.5.3-7) unstable; urgency=medium
+
+  * Team upload.
+  * Depend on ANTLR 3.2 to avoid the incompatibilities with ANTLR 3.5
+    (Closes: #796437, #796933)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 26 Oct 2015 22:09:30 +0100
+
+jython (2.5.3-6) unstable; urgency=medium
+
+  * Team upload.
+  * Add binary dependency on libjnr-constants-java and
+    libjnr-posix-java (>= 3.0.10~). (Closes: #786651)
+
+ -- tony mancill <tmancill@debian.org>  Thu, 14 May 2015 21:32:38 -0700
+
+jython (2.5.3-5) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable.
+
+ -- tony mancill <tmancill@debian.org>  Thu, 07 May 2015 22:08:00 -0700
+
+jython (2.5.3-4) experimental; urgency=low
+
+  * Team upload.
+  * Updated debian/control and added patch to build against updated
+    jnr-constants and jnr-posix packages.
+  * Standards-Version updated to 3.9.6
+  * Use DH 9.
+  * Upload to experimental due to build-deps in experimental.
+
+ -- tony mancill <tmancill@debian.org>  Wed, 08 Apr 2015 22:49:51 +0000
+
+jython (2.5.3-3) unstable; urgency=medium
+
+  * Make junit.framework OSGi package import optional since it's needed
+    only to run tests.
+
+ -- Jakub Adam <jakub.adam@ktknet.cz>  Tue, 07 Oct 2014 17:14:40 +0200
+
+jython (2.5.3-2) unstable; urgency=medium
+
+  [ Emmanuel Bourg ]
+  * Team upload.
+  * Use canonical URLs for the Vcs-* fields
+
+  [ Jakub Adam ]
+  * Generate OSGi metadata for jython.jar.
+  * Add Jakub Adam to Uploaders.
+
+  [ Miguel Landaeta ]
+  * Moved the package to Git.
+  * Fix clean target in d/rules to allow twice in a row builds.
+
+ -- Jakub Adam <jakub.adam@ktknet.cz>  Thu, 31 Jul 2014 22:06:36 +0200
+
+jython (2.5.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #690116)
+  * Adopt the package under the pkg-java umbrella
+    (Closes: #705825)
+  * Standards-Version updated to 3.9.5
+  * Import in the pkg-java VCS
+  * Switch to dpkg-source 3.0 (quilt) format
+  * jython should work unde virtualenv (Closes: #705146)
+    Thanks to Arthur Noel for the patch
+  * Update of the description (Closes: #676831)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 21 Nov 2013 14:25:27 +0100
+
+jython (2.5.2-2) unstable; urgency=low
+
+  * Orphaning this package.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Sat, 20 Apr 2013 16:43:20 +0200
+
+jython (2.5.2-1) unstable; urgency=low
+
+  * New upstream release 2.5.2 (closes: #623625)
+  * Bumped version of Debian policy compliance to 3.9.3 (nothing to do)
+  * Added some lintian overrides to ignore some very special cases.
+  * Tests are no longer installed (saving about 1/3 of the package size).
+  * Fixed dependency declarations.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Sun, 06 May 2012 10:26:34 +0200
+
+jython (2.5.1-2) unstable; urgency=low
+
+  * Added missing build-dependency declaration on jline (closes: #591114)
+  * Bumped version of Debian policy compliance to 3.9.1 (nothing to do)
+  * sys.executable Python variable is now set by perl launcher
+    (closes: #591478)
+
+ -- Nicolas Duboc <nduboc@debian.org>  Wed, 04 Aug 2010 09:09:00 +0200
+
+jython (2.5.1-1) unstable; urgency=low
+
+  * New upstream release (closes: #497352)
+  * Acknowledged 2.2.1-2.1 NMU.
+  * Added Homepage field in control file.
+  * libservlet-java is now a suggestion, needed only to
+    write servlets in jython
+  * Removed the jythonc command, which is no longer available in 2.5.
+  * Removed the obsolete html documentation.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Fri, 09 Jul 2010 18:02:19 +0200
+
+jython (2.2.1-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Update build/runtime dependencies to appropriate default-j* packages.
+    (Closes: #463114, #570195)
+  * lintian error/warning fixes.
+    - debian/control
+      - Move ant to build-depends.
+      - Add misc:Depends to dependencies.
+      - Update standards version to 3.8.4.
+    - debian/*.doc-base.*
+      - Remove 'Apps' from 'Section' value.
+      - Remove single white space at the end of file.
+    - debian/copyright
+      - Convert to UTF-8 encoding.
+
+ -- Onkar Shinde <onkarshinde@ubuntu.com>  Sat, 20 Mar 2010 13:25:59 +0530
+
+jython (2.2.1-2) unstable; urgency=low
+
+  * Fixed typo in Recommends (java-gcp-compat-dev -> java-gcj-compat-dev)
+    (closes: #454791)
+
+ -- Nicolas Duboc <nduboc@debian.org>  Sat, 09 Aug 2008 14:53:53 +0200
+
+jython (2.2.1-1) unstable; urgency=low
+
+  * New upstream release. (closes: #440148, #281038)
+  * Default config is now set by jython start script through Java properties
+  * Updated the jython(1) man page for new options in version 2.2.
+  * Updated menu entry for the renamed 'Applications' entry.
+  * Replaced the DH_COMPAT line in rules by the debian/compat file.
+  * Use an editline-compatile method to inhibit completion on Tab.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Thu, 18 Oct 2007 17:28:08 +0200
+
+jython (2.1.0-23) unstable; urgency=low
+
+  * Install the upstream NEWS file as /usr/share/doc/changelog
+    (closes: #314711)
+  * Compile zxJDBC (closes: #137090)
+  * Replaced the xml package by the PyXML distribution included in
+    upstream binary package of Jython 2.1 (PyXML 0.6.6)
+  * Replaced the drv_xmlproc.py file with a newer version from PyXML CVS
+    (closes: #276873)
+  * Do not include package dirs of the python-2.1 package in jython search
+    path.
+  * Removed the test for python2.1 from /usr/bin/jythonc (closes: #388046)
+  * Depends on java-gcj-compat instead of gij directly (closes: #240213)
+  * Build using java-gcj-compat-dev.
+
+ -- Nicolas Duboc <nduboc@debian.org>  Tue,  3 Oct 2006 15:59:30 +0200
+
+jython (2.1.0-22) unstable; urgency=low
+
+  * New maintainer (closes: #315289)
+  * Binary package now includes the standard library modules and no
+    longer depends on python2.1 (closes: #362292)
+  * Debian policy compliance bumped to 3.7.2 (nothing to do)
+
+ -- Nicolas Duboc <nduboc@debian.org>  Fri, 14 Jul 2006 15:41:57 +0200
+
+jython (2.1.0-21) unstable; urgency=low
+
+  * Orphaning package (see #315289 for details).
+  * Switched from debhelper compatibility level 3 to 5 (updated
+    build-depends, no other changes required).
+  * Bumped standards-version to 3.6.2 (no changes required).
+
+ -- Ben Burton <bab@debian.org>  Tue, 21 Feb 2006 23:28:19 +1100
+
+jython (2.1.0-20) unstable; urgency=low
+
+  * Use libservlet2.3-java instead of libservlet2.2-java (closes: #301042).
+  * If /usr/bin/java is broken or missing, use $JAVA_HOME/bin/java as a
+    final fallback (closes: #297546).  Displays prominent warnings if this
+    is necessary, since it means the system is misconfigured.
+
+ -- Ben Burton <bab@debian.org>  Fri, 25 Mar 2005 15:25:34 +1100
+
+jython (2.1.0-19) unstable; urgency=low
+
+  * Replaced /usr/bin/jython with a perl script rewritten from scratch.
+    It behaves in much the same way, except that:
+      - all command-line options and $JAVA_OPTIONS are scanned for JNI
+        library path components (-Djava.library.path=...), which are then
+        merged with /usr/lib/jni into a single JNI library path that is
+        passed to the java runtime (closes: #278007);
+      - all other command-line options of the form -Djava.... are assumed
+        to be java options and are thus merged into $JAVA_OPTIONS instead
+        (i.e., they are passed to the java runtime and not jython itself).
+  * Added /usr/lib/python2.1/site-packages and /usr/lib/site-python to the
+    python path (along with /usr/lib/python2.1 which was already present).
+
+ -- Ben Burton <bab@debian.org>  Mon, 25 Oct 2004 18:59:38 +1000
+
+jython (2.1.0-18) unstable; urgency=low
+
+  * Build with -target 1.3 so that jikes doesn't treat "assert" as a keyword.
+  * Changed recommends from www-browser to (w3m | www-browser) in jython-doc.
+  * Fixed typo in jythonc manpage (closes: #258002).
+
+ -- Ben Burton <bab@debian.org>  Wed,  7 Jul 2004 20:46:25 +1000
+
+jython (2.1.0-17) unstable; urgency=low
+
+  * Use python's pixmap in the debian menu entry.
+
+ -- Ben Burton <bab@debian.org>  Sun, 14 Mar 2004 14:11:15 +1100
+
+jython (2.1.0-16) unstable; urgency=low
+
+  * Build using jikes-gij instead of gcj to avoid crashes under kaffe
+    (assertion `e->start_pc <= e->end_pc').
+
+ -- Ben Burton <bab@debian.org>  Sat,  3 Jan 2004 10:47:28 +1100
+
+jython (2.1.0-15) unstable; urgency=low
+
+  * Changed recommends python2.1 to depends - the recommends seems to have
+    caused a little too much confusion (closes: #224922).
+
+ -- Ben Burton <bab@debian.org>  Tue, 30 Dec 2003 09:11:52 +1100
+
+jython (2.1.0-14) unstable; urgency=low
+
+  * Build in servlet material now that libservlet2.2-java is back in main.
+  * Build in other previously-excluded material that is now supported by gcj.
+  * Quit with a polite error message if users try to run jythonc without
+    python2.1.
+  * Bumped standards-version to 3.6.1.
+
+ -- Ben Burton <bab@debian.org>  Tue, 30 Sep 2003 01:08:47 +1000
+
+jython (2.1.0-13) unstable; urgency=low
+
+  * Inhibit tab completion in the readline console where possible
+    (closes: #184838).
+  * Minor update for manpage jython.conf.5.
+
+ -- Ben Burton <bab@debian.org>  Wed, 27 Aug 2003 13:50:38 +1000
+
+jython (2.1.0-12) unstable; urgency=low
+
+  * Include /usr/lib/jni in JNI path since some JVMs still don't reflect
+    java policy.
+  * Bumped standards-version to 3.6.0.
+  * Slight manpage cleanup.
+
+ -- Ben Burton <bab@debian.org>  Tue, 19 Aug 2003 16:42:36 -0500
+
+jython (2.1.0-11) unstable; urgency=low
+
+  * Builds using gcj (default version) instead of gcj-3.2 (closes: #196068).
+  * Builds with -fno-assert.
+  * Moving into section python.
+  * Bumped standards-version to 3.5.10.0.
+
+ -- Ben Burton <bab@debian.org>  Thu,  5 Jun 2003 10:53:40 +1000
+
+jython (2.1.0-10) unstable; urgency=low
+
+  * Suggest defaults for virtual package dependencies.
+  * Added lintian/linda overrides.
+  * New maintainer email address.
+  * linux.conf.au rocks!
+
+ -- Ben Burton <bab@debian.org>  Sat, 25 Jan 2003 13:38:52 +0800
+
+jython (2.1.0-9) unstable; urgency=low
+
+  * Patch for exception printing in interactive interpreter (closes: #166843).
+  * Bumped standards-version to 3.5.7.0.
+
+ -- Ben Burton <benb@acm.org>  Tue, 29 Oct 2002 09:08:29 +1100
+
+jython (2.1.0-8) unstable; urgency=low
+
+  * Finally get rid of whichjava.  It's only needed for jikes users, and if
+    people have /usr/bin/javac pointing to jikes (and not jikes-gij, etc),
+    they should have $CLASSPATH set anyway to make javac behave properly.
+
+ -- Ben Burton <benb@acm.org>  Thu,  3 Oct 2002 12:06:19 +1000
+
+jython (2.1.0-7) unstable; urgency=low
+
+  * Added support for passing options to the Java interpreter through
+    environment variable $JAVA_OPTIONS (closes: #161187).
+
+ -- Ben Burton <benb@acm.org>  Wed, 18 Sep 2002 09:00:48 +1000
+
+jython (2.1.0-6) unstable; urgency=low
+
+  * Build uses gcj-3.2 instead of jikes.
+  * Pruned jython dependencies since JVMs are now providing virtual
+    java packages.
+  * Updated whichjava to recognise gij-3.2.
+  * Added /usr/lib to java.library.path since some JVMs don't include it
+    by default (closes: Bug#160765).
+
+ -- Ben Burton <benb@acm.org>  Sat, 14 Sep 2002 17:56:37 +1000
+
+jython (2.1.0-5) unstable; urgency=low
+
+  * Don't build PyServlet.class since servlet libraries have moved from
+    main to contrib (closes: Bug#154051).
+
+ -- Ben Burton <benb@acm.org>  Fri,  2 Aug 2002 14:16:08 +1000
+
+jython (2.1.0-4) unstable; urgency=low
+
+  * Empty input lines no longer break readline consoles (closes: Bug#145613).
+
+ -- Ben Burton <benb@acm.org>  Mon, 24 Jun 2002 00:27:30 +1000
+
+jython (2.1.0-3) unstable; urgency=low
+
+  * Don't search for bootstrap classes unless you really have to
+    (closes: Bug#148591).
+  * Added gij-3.1 details to whichjava script.
+
+ -- Ben Burton <benb@acm.org>  Fri, 31 May 2002 14:00:27 +1000
+
+jython (2.1.0-2) unstable; urgency=high
+
+  * Updated to reflect relocated kaffe classes.
+  * Build-depends on newer (non-broken) jikes (closes: Bug#141259).
+
+ -- Ben Burton <benb@acm.org>  Fri, 19 Apr 2002 19:54:19 +1000
+
+jython (2.1.0-1) unstable; urgency=low
+
+  * New upstream release (closes: Bug#129335).
+  * Removed debugging output from startup scripts (closes: Bug#125681).
+
+ -- Ben Burton <benb@acm.org>  Sat,  9 Feb 2002 18:22:49 +1100
+
+jython (2.1-beta1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Incorporated merge of libeditline-java and libreadline-java.
+
+ -- Ben Burton <benb@acm.org>  Sun,  9 Dec 2001 14:45:15 -0600
+
+jython (2.1-alpha3-6) unstable; urgency=low
+
+  * Depends: made more flexible until all of the JVM packages provide
+    javaN-runtime.
+  * Looks for (and recommends) CPython 2.1 and no other version.
+
+ -- Ben Burton <benb@acm.org>  Wed, 21 Nov 2001 10:19:03 -0600
+
+jython (2.1-alpha3-5) unstable; urgency=low
+
+  * Updated to conform to new python policy (closes: Bug#118250).
+  * Recommends python (>= 2.1.1-2) (closes: Bug#118429).
+  * Improved CPython path determination in /usr/bin/jython.
+  * Updated to conform to new java policy.
+  * Added patched imaplib.py to /usr/share/jython/Lib (thanks dman).
+
+ -- Ben Burton <benb@acm.org>  Wed,  7 Nov 2001 18:01:22 -0600
+
+jython (2.1-alpha3-4) unstable; urgency=low
+
+  * Adapted to renaming of lib-editline-java to libeditline-java.
+  * Replaced Build-Depends with Build-Depends-Indep.
+
+ -- Ben Burton <benb@acm.org>  Sat, 27 Oct 2001 18:32:39 -0500
+
+jython (2.1-alpha3-3) unstable; urgency=low
+
+  * Added support for new j2se1.3 packages.
+
+ -- Ben Burton <benb@acm.org>  Sun, 23 Sep 2001 22:58:54 -0500
+
+jython (2.1-alpha3-2) unstable; urgency=low
+
+  * Oops, I buggered up the cachedir in the previous upload - fixed.
+  * Brought in warnings.py from CPython 2.1 for use with jythonc.
+  * Updated whichjava and whichjavac.
+
+ -- Ben Burton <benb@acm.org>  Mon,  3 Sep 2001 12:24:03 -0500
+
+jython (2.1-alpha3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added readline support using lib-editline-java.
+  * Serious reworking of startup scripts.
+  * Made all scripts sh-compilant.
+  * No longer clobbers $CLASSPATH (closes: Bug#110830).
+
+ -- Ben Burton <benb@acm.org>  Sat,  1 Sep 2001 09:34:50 -0500
+
+jython (2.1-alpha1-3) unstable; urgency=low
+
+  * Added recognition of the Open Runtime Platform (which Jython cannot use).
+  * Ensures findjava and findjavac specifically start by checking for
+    /usr/bin/java and /usr/bin/javac respectively.
+  * Removed debian/conffiles since debhelper picks these up anyway.
+  * Updated standards-version to 3.5.6.
+  * Cleaned up debian/rules.
+
+ -- Ben Burton <benb@acm.org>  Tue, 14 Aug 2001 08:41:01 +1000
+
+jython (2.1-alpha1-2) unstable; urgency=low
+
+  * Made findjava* scripts use /bin/bash (closes: Bug#104522).
+
+ -- Ben Burton <benb@acm.org>  Sun, 29 Jul 2001 02:22:22 +1000
+
+jython (2.1-alpha1-1) unstable; urgency=low
+
+  * Initial Release (Closes: Bug#68287).
+
+ -- Ben Burton <benb@acm.org>  Mon,  2 Jul 2001 17:32:26 -0500

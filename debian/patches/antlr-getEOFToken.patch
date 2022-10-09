@@ -1,0 +1,27 @@
+Description: ANTLR 3.2 doesn't have the getEOFToken() method
+Index: jython/grammar/Python.g
+===================================================================
+--- jython.orig/grammar/Python.g
++++ jython/grammar/Python.g
+@@ -261,7 +261,7 @@ private ErrorHandler errorHandler;
+                     eofWhileNested = true;
+                 }
+                 // -- end Jython addition
+-                return getEOFToken();
++                return Token.EOF_TOKEN;
+             }
+             try {
+                 mTokens();
+Index: jython/grammar/PythonPartial.g
+===================================================================
+--- jython.orig/grammar/PythonPartial.g
++++ jython/grammar/PythonPartial.g
+@@ -138,7 +138,7 @@ private ErrorHandler errorHandler;
+                     eofWhileNested = true;
+                 }
+                 // -- end Jython addition
+-                return getEOFToken();
++                return Token.EOF_TOKEN;
+             }
+             try {
+                 mTokens();

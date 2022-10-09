@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+
+registry                => /etc/jython/jython.conf
+debian/jython_launcher  => /usr/share/jython/bin/jython

@@ -1,0 +1,12 @@
+Index: jython/build.xml
+===================================================================
+--- jython.orig/build.xml
++++ jython/build.xml
+@@ -1008,6 +1008,7 @@ The text for an official release would c
+         <path id="javadoc.classpath">
+             <pathelement path="${java.class.path}" />
+             <pathelement path="${compile.dir}" />
++            <pathelement path="/usr/share/java/junit4.jar" />
+             <path refid="main.classpath" />
+         </path>
+         <mkdir dir="${apidoc.dir}" />

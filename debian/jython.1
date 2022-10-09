@@ -1,0 +1,148 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH JYTHON 1 "July 7, 2001"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+jython \- Python seamlessly integrated with Java
+.SH SYNOPSIS
+.B jython
+[ \fB\-i\fP ]
+[ \fB\-S\fP ]
+[ \fB\-v\fP ]
+[ \fB\-D\fP\fIproperty\fP\fB=\fP\fIvalue\fP ... ]
+[ \fB\-W\fP\fIargument\fP ]
+.br
+       [ \fB\-E\fP\fIcodec\fP ]
+[ \fB\-Q\fP\fIargument\fP ]
+.br
+       [ \fB\-jar\fP \fIjar\fP | \fB\-c\fP \fIcmd\fP | \fIfile\fP | \fB\-\fP ]
+[ \fIscript-args\fP ]
+.PP
+.B jython
+[ \fB\-\-help\fP | \fB\-\-version\fP ]
+.SH DESCRIPTION
+\fBJython\fP is an implementation of the high-level, dynamic, object-oriented
+language Python seamlessly integrated with the Java platform.  The
+predecessor to Jython, JPython, is certified as 100% Pure Java.
+.PP
+Jython is complementary to Java and is especially suited for the
+following tasks:
+.PP
+.TP
+.I Embedded scripting:
+Java programmers can add the Jython libraries to their system to allow
+end users to write simple or complicated scripts that add functionality
+to the application.
+.TP
+.I Interactive experimentation:
+Jython provides an interactive interpreter that can be used to interact
+with Java packages or with running Java applications.  This allows
+programmers to experiment with and debug any Java system using Jython.
+.TP
+.I Rapid application development:
+Python programs are typically 2-10X shorter than the equivalent Java
+program.  This translates directly to increased programmer productivity.
+The seamless interaction between Python and Java allows developers to
+freely mix the two languages both during development and in shipping
+products.
+.PP
+To make a jython script executable on your system you can add the
+following line to the top of the file:
+.PP
+.RS
+.I #!/usr/bin/env jython
+.RE
+.PP
+You will also need to add execute permissions to the script using
+.BR chmod (1).
+Note that \fI#!/usr/bin/jython\fP will not work; you must use
+\fI#!/usr/bin/env jython\fP.  This is because /usr/bin/jython is a script
+itself, not a compiled binary.
+.SH OPTIONS
+A summary of options is included below.
+.TP
+.B \-i
+Continue running Jython interactively after running the given script, and
+force prompts even if standard input doesn't appear to be a terminal.
+.TP
+.B \-S
+Don't imply \fIimport site\fP on initialisation.
+.TP
+.B \-v
+Trace import statements on error output.
+.TP
+.B \fB\-D\fP\fIproperty\fP\fB=\fP\fIvalue\fP
+Set the Jython property \fIproperty\fP to \fIvalue\fP; see
+.BR jython.conf (5)
+for details of available properties.
+.TP
+.B \fB\-W\fP\fIargument\fP
+Warning control. The full form of argument is
+\fIaction\fP:\fImessage\fP:\fIcategory\fP:\fImodule\fP:\fIline\fP.
+Trailing empty fields may be omitted. Multiple \fB-W\fP options may be given.
+See documentation of the \fIwarnings\fP
+module for details.
+.TP
+.B \fB\-E\fP\fIcodec\fP
+Set the encoding used to read module source files from disk.
+.TP
+.B \fB\-Q\fP\fIargument\fP
+Division control. See PEP 239 for details. Valid arguments are \fIold\fP,
+\fInew\fP, \fIwarn\fP and \fIwarnall\fP.
+.TP
+\fB\-jar\fP \fIjar\fP
+The program to run is read from the file \fI__run__.py\fP in the
+specified \fIjar\fP archive.
+.TP
+\fB\-c\fP \fIcmd\fP
+The program to run is passed as the \fIcmd\fP string.  This option
+terminates the options list.
+.TP
+.I file
+The program to run is the script \fIfile\fP.
+.TP
+.B \-
+The program to run is read from standard input (default behaviour).
+Interactive mode is used if running on a tty.  This flag allows you to
+pipe a file into Jython and have it be treated correctly.
+.TP
+.I script-args
+Command-line arguments to pass to the Jython script in
+\fIsys.argv[1:]\fP.
+.TP
+.B \-\-help
+Print a usage message and exit.
+.TP
+.B \-\-version
+Print the Jython version number and exit.
+.SH ENVIRONMENT VARIABLES
+.TP
+JAVA (default: /usr/bin/java)
+The Java interpreter to use when running Jython.
+.TP
+JAVA_OPTIONS (default: empty)
+Options to pass to the Java interpreter when running Jython.
+.SH SEE ALSO
+.BR jythonc (1),
+.BR jython.conf (5).
+.PP
+If the Debian package \fIjython-doc\fP is installed,
+full documentation from the Jython authors will be available in
+\fI/usr/share/doc/jython-doc/html/\fP.
+.SH AUTHOR
+This manual page was prepared by Ben Burton <bab@debian.org> for the Debian
+GNU/Linux system (but may be used by others).  It is based upon the
+official Jython documentation.

@@ -1,0 +1,7 @@
+version=4
+opts="dversionmangle=s/\+repack\d*$//, \
+	uversionmangle=s/(([ab]|rc)\d+)/~$1/" \
+	https://github.com/jythontools/jython/tags \
+	.*/v([\d\.]+[a-z0-9]*).tar.gz \
+	debian \
+	debian/orig-tar.sh

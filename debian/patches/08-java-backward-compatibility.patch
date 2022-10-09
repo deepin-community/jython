@@ -1,0 +1,47 @@
+Description: Preserves the backward compatibility with previous Java versions when built with Java 11+
+Author: Emmanuel Bourg <ebourg@apache.org>
+Forwarded: not
+Index: jython/build.xml
+===================================================================
+--- jython.orig/build.xml
++++ jython/build.xml
+@@ -693,6 +693,7 @@ The text for an official release would c
+                 destdir="${compile.dir}"
+                 target="${jdk.target.version}"
+                 source="${jdk.source.version}"
++                release="${jdk.target.version}"
+                 debug="${debug}"
+                 deprecation="${deprecation}"
+                 nowarn="${nowarn}"
+@@ -758,6 +759,7 @@ The text for an official release would c
+         <javac destdir="${compile.dir}"
+                target="${jdk.target.version}"
+                source="${jdk.source.version}"
++               release="${jdk.target.version}"
+                debug="${debug}"
+                deprecation="${deprecation}"
+                nowarn="${nowarn}"
+@@ -778,6 +780,7 @@ The text for an official release would c
+                destdir="${compile.dir}"
+                target="${jdk.target.version}"
+                source="${jdk.source.version}"
++               release="${jdk.target.version}"
+                debug="${debug}"
+                deprecation="${deprecation}"
+                nowarn="${nowarn}"
+@@ -790,6 +793,7 @@ The text for an official release would c
+                destdir="${compile.dir}"
+                target="${jdk.target.version}"
+                source="${jdk.source.version}"
++               release="${jdk.target.version}"
+                debug="${debug}"
+                deprecation="${deprecation}"
+                nowarn="${nowarn}"
+@@ -1197,6 +1201,7 @@ The text for an official release would c
+                destdir="${compile.dir}"
+                target="${jdk.target.version}"
+                source="${jdk.source.version}"
++               release="${jdk.target.version}"
+                debug="${debug}"
+                deprecation="${deprecation}"
+                nowarn="${nowarn}"

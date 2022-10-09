@@ -1,0 +1,11 @@
+Jython documentation for Debian
+-----------------
+
+This package provides the Jython Java API documentation in
+  /usr/share/doc/jython-doc
+
+Jython itself is available with the jython Debian package.
+
+The complete Jython documentation is available at
+  http://jython.org/currentdocs.html
+

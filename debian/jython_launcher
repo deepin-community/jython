@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Used to start the Jython interpreter.
+#
+if [ -n "$JYTHON_WRAPPER_DEBUG" ]; then
+  set -x
+fi
+
+unset jython_compiler
+if [ -n "$CALLED_FROM_JYTHONC" ]; then
+  jython_compiler=-Dpython.jythonc.compiler="$JAVAC"
+fi
+
+jython_home="$(dirname "$(dirname "$(readlink -f "$0")")")"
+
+exec java -jar /usr/share/java/jython.jar \
+  -Dpython.home="$jython_home" \
+  -Dpython.executable="$0" \
+  -Dpython.console=org.python.util.JLineConsole \
+  $jython_compiler \
+  "$@"

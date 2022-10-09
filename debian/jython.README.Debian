@@ -1,0 +1,18 @@
+Jython for Debian
+-----------------
+
+The Jython classes are stored in the archive
+/usr/share/java/jython.jar.
+
+Consult the jython(1) man page for details about invocation
+of the Jython interpreter.
+
+On Debian, the default jython cachedir path is set to
+${user.home}/.jython-cache instead of ${python.home}/cachedir.
+
+The Jython API documentation is provided by the jython-doc package in
+/usr/share/doc/jython-doc.
+
+The complete Jython documentation is available at
+  http://jython.org/currentdocs.html
+

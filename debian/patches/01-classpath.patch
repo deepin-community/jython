@@ -1,0 +1,75 @@
+Description: patch build.xml to extract, re-arrange and re-inject
+ classpaths. See debian/rules.
+Author: Gilles Filippini <pini@deian.org>
+Index: jython/build.xml
+===================================================================
+--- jython.orig/build.xml
++++ jython/build.xml
+@@ -235,7 +235,7 @@ informix.jar = ../support/jdbc-4.10.12.j
+             <istrue value="${oracle.present}"/>
+         </condition>
+ 
+-        <path id="main.classpath">
++        <path id="their.main.classpath">
+             <!-- The non-free database driver JARs, if not present. -->
+             <filelist files="${informix.location} ${oracle.location}" />
+ 
+@@ -275,9 +275,13 @@ informix.jar = ../support/jdbc-4.10.12.j
+                 <file name="jaxb-api.jar"/>
+             </filelist>
+         </path>
++        <pathconvert property="their.main.classpath" refid="their.main.classpath"/>
++	<path id="main.classpath">
++	    <pathelement path="${main.classpath}"/>
++	</path>
+ 
+-        <path id="test.classpath">
+-            <path refid="main.classpath"/>
++        <path id="their.test.classpath">
++            <path refid="their.main.classpath"/>
+             <filelist dir="${extlibs.dir}">
+                 <!-- Pin to 4.10 until dependency on hamcrest classes resolved. -->
+                 <file name="junit-4.10.jar" />
+@@ -286,6 +290,10 @@ informix.jar = ../support/jdbc-4.10.12.j
+             <pathelement location="${compile.dir}" />
+             <pathelement location="${cpptasks.jar.dir}" />
+         </path>
++        <pathconvert property="their.test.classpath" refid="their.test.classpath"/>
++	<path id="test.classpath">
++	    <pathelement path="${test.classpath}"/>
++	</path>
+     </target>
+ 
+     <target name="init"
+@@ -352,6 +360,13 @@ informix.jar = ../support/jdbc-4.10.12.j
+         <fail unless="${hg.present}" message="A Mercurial repository is required" />
+     </target>
+ 
++    <target name="get-their-main-classpath" depends="init">
++        <echo message="${their.main.classpath}"/>
++    </target>
++    <target name="get-their-test-classpath" depends="init">
++        <echo message="${their.test.classpath}"/>
++    </target>
++
+     <target name="dump-env" depends="init, dump"
+             description="dump the properties computed for a regular build without running it" />
+ 
+@@ -969,6 +984,7 @@ The text for an official release would c
+                  excludes="org/python/expose/generate/**,org/python/version.properties"/>
+           </nameunion>
+           <manifest>
++              <attribute name="Class-Path" value="${runtime.classpath}"/>
+               <attribute name="Main-Class" value="org.python.util.jython" />
+               <attribute name="Built-By" value="${user.name}" />
+               <attribute name="Implementation-Vendor" value="Python Software Foundation"/>
+@@ -1152,9 +1168,6 @@ The text for an official release would c
+              $dist.dir/javalib/*, to be available when using jython-dev.jar
+         -->
+         <copy todir="${dist.dir}/javalib">
+-            <fileset dir="${basedir}/extlibs">
+-                <exclude name="profile.properties"/>
+-            </fileset>
+             <fileset dir="${build.dir}">
+                 <include name="*.jar"/>
+                 <include name="*.properties"/>

@@ -1,0 +1,7 @@
+00-missing-dep.patch
+01-classpath.patch
+05-no-com.carrotsearch.sizeof.patch
+javadoc-classpath.patch
+reproducible-builds.patch
+08-java-backward-compatibility.patch
+antlr-getEOFToken.patch

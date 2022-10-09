@@ -1,0 +1,2 @@
+/etc/jython/jython.conf /usr/share/jython/registry
+/usr/share/jython/bin/jython /usr/bin/jython
